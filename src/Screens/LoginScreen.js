@@ -13,6 +13,7 @@ import * as Animatable from 'react-native-animatable';
 import {Input} from '../components/Input';
 import {useNavigation} from '@react-navigation/native';
 import {COLORS} from '../utils';
+import {GoogleIcon} from '../assets/icon';
 
 const useLoginFormState = () => {
   const [username, setUsername] = useState('');

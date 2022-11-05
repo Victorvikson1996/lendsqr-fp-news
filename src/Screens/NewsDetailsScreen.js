@@ -16,8 +16,36 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {COLORS} from '../utils';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Headers} from '../components/Header';
+import {useNavigation} from '@react-navigation/native';
 const {height} = Dimensions.get('window');
 const ITEM_HEIGHT = height * 0.5;
+import {BackIcon} from '../assets/icon';
+
+const BackButton = ({}) => {
+  const navigation = useNavigation();
+  return (
+    <TouchableOpacity
+      onPress={() => {
+        buttonRef.current.fadeOut(100).then(() => {
+          navigation.goBack();
+        });
+      }}>
+      <Image
+        source={{uri: ''}}
+        size={28}
+        color={COLORS.black}
+        style={{
+          position: 'absolute',
+          top: 100,
+          right: 20,
+          zIndex: 2,
+          height: 20,
+          width: 40,
+        }}
+      />
+    </TouchableOpacity>
+  );
+};
 
 const NewsDetailsScreen = ({navigation, route}) => {
   const {item} = route.params;
@@ -44,26 +72,18 @@ const NewsDetailsScreen = ({navigation, route}) => {
         duration={600}
         delay={300}
         style={[StyleSheet.absoluteFillObject]}>
-        <TouchableOpacity
-          onPress={() => {
-            buttonRef.current.fadeOut(100).then(() => {
-              navigation.goBack();
-            });
+        <Pressable
+          onPress={() => navigation.goBack()}
+          style={{
+            position: 'absolute',
+            top: 50,
+            right: 20,
+            zIndex: 2,
+            // height: 20,
+            // width: 40,
           }}>
-          <Image
-            source={require('../assets/icon/cancel.png')}
-            size={28}
-            color={COLORS.black}
-            style={{
-              position: 'absolute',
-              top: 100,
-              right: 20,
-              zIndex: 2,
-              height: 20,
-              width: 40,
-            }}
-          />
-        </TouchableOpacity>
+          <BackIcon />
+        </Pressable>
       </Animatable.View>
       <View
         style={{flexDirection: 'row', marginTop: 10, paddingHorizontal: 20}}>
