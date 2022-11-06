@@ -23,10 +23,16 @@ const HomeScreen = () => {
 
   // const news = useSelector(state => state.news);
   const news = useSelector(state => state.news);
-  console.log('NEWS', news);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(
+      getNews({lang: 'en', media: 'True', topic: 'tech', country: 'UK'}),
+      setIsLoading(false),
+    );
+  }, []);
+
+  const HandleRefreshControl = useCallback(() => {
     dispatch(
       getNews({lang: 'en', media: 'True', topic: 'tech', country: 'UK'}),
       setIsLoading(false),
@@ -62,6 +68,12 @@ const HomeScreen = () => {
           renderItem={({item, index}) => <HomeItem item={item} index={index} />}
           showsVerticalScrollIndicator={false}
           ListHeaderComponent={Headers}
+          refreshControl={
+            <RefreshControl
+              refreshing={isLoading}
+              onRefresh={HandleRefreshControl}
+            />
+          }
         />
       </View>
     </SafeAreaView>
@@ -72,6 +84,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.white,
+  },
+  list: {
+    flex: 1,
+    flexGrow: 1,
+    paddingVertical: 8,
   },
 });
 
