@@ -20,49 +20,21 @@ import {useNavigation} from '@react-navigation/native';
 const {height} = Dimensions.get('window');
 const ITEM_HEIGHT = height * 0.5;
 import {BackIcon} from '../assets/icon';
-
-const BackButton = ({}) => {
-  const navigation = useNavigation();
-  return (
-    <TouchableOpacity
-      onPress={() => {
-        buttonRef.current.fadeOut(100).then(() => {
-          navigation.goBack();
-        });
-      }}>
-      <Image
-        source={{uri: ''}}
-        size={28}
-        color={COLORS.black}
-        style={{
-          position: 'absolute',
-          top: 100,
-          right: 20,
-          zIndex: 2,
-          height: 20,
-          width: 40,
-        }}
-      />
-    </TouchableOpacity>
-  );
-};
+import moment from 'moment';
 
 const NewsDetailsScreen = ({navigation, route}) => {
   const {item} = route.params;
   const buttonRef = React.useRef();
 
+  const date = item.published_date;
+
   return (
-    <View style={{flex: 1, backgroundColor: '#ffff'}}>
+    <View style={styles.container}>
       <StatusBar />
-      <View id={`item.${item.id}.image_url`}>
+      <View id={`item.${item.id}.media`}>
         <Image
-          source={{uri: item.image_url}}
-          style={{
-            width: '100%',
-            height: ITEM_HEIGHT,
-            borderBottomLeftRadius: 20,
-            borderBottomRightRadius: 20,
-          }}
+          source={{uri: `${item?.media}`}}
+          style={styles.image}
           resizeMode="cover"
         />
       </View>
@@ -74,110 +46,90 @@ const NewsDetailsScreen = ({navigation, route}) => {
         style={[StyleSheet.absoluteFillObject]}>
         <Pressable
           onPress={() => navigation.goBack()}
-          style={{
-            position: 'absolute',
-            top: 50,
-            right: 20,
-            zIndex: 2,
-            // height: 20,
-            // width: 40,
-          }}>
+          style={styles.iconContainer}>
           <BackIcon />
         </Pressable>
       </Animatable.View>
-      <View
-        style={{flexDirection: 'row', marginTop: 10, paddingHorizontal: 20}}>
-        <View style={{flexDirection: 'column', paddingLeft: 6}}>
+      <View style={styles.contentCon}>
+        <View style={styles.authorCon}>
           <View id={`item.${item.id}.title`}>
-            <Text
-              style={{
-                color: COLORS.black,
-                fontSize: 24,
-                fontWeight: 'bold',
-                lineHeight: 28,
-              }}>
-              {item.title}
-            </Text>
+            <Text style={styles.author}>{item.author}</Text>
           </View>
           <View id={`item.${item.id}.description`}>
-            <Text
-              style={{
-                color: COLORS.black,
-                fontSize: 16,
-                fontWeight: 'bold',
-                lineHeight: 18,
-              }}>
-              {item.description}
+            <Text style={styles.date}>
+              Date: {moment(item.published_date).utc().format('MMM Do, YYYY')}
             </Text>
           </View>
         </View>
       </View>
       <ScrollView
         indicatorStyle="white"
-        style={{
-          paddingHorizontal: 20,
-          backgroundColor: COLORS.white,
-        }}
+        style={styles.contentCon}
         contentContainerStyle={{paddingVertical: 20}}>
-        <Text
-          style={{
-            fontSize: 18,
-            color: COLORS.black,
-            lineHeight: 24,
-            marginBottom: 4,
-          }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </Text>
-        <Text
-          style={{
-            fontSize: 18,
-            color: COLORS.black,
-            lineHeight: 24,
-            marginBottom: 4,
-          }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </Text>
+        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.summary}>{item.summary}</Text>
       </ScrollView>
     </View>
   );
 };
 
-// NewsDetailsScreen.sharedElements = route => {
-//   const {item} = route.params;
-//   return [
-//     {
-//       id: `item.${item.id}.image_url`,
-//       animation: 'move',
-//       resize: 'clip',
-//     },
-//     {
-//       id: `item.${item.id}.title`,
-//       animation: 'fade',
-//       resize: 'clip',
-//     },
-//     {
-//       id: `item.${item.id}.description`,
-//       animation: 'fade',
-//       resize: 'clip',
-//     },
-//     {
-//       id: `item.${item.id}.iconName`,
-//       animation: 'move',
-//       resize: 'clip',
-//     },
-//   ];
-// };
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#ffff',
+  },
+  image: {
+    width: '100%',
+    height: ITEM_HEIGHT,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+  },
+  iconContainer: {
+    position: 'absolute',
+    top: 50,
+    right: 20,
+    zIndex: 2,
+    // height: 20,
+    // width: 40,
+  },
+  author: {
+    color: COLORS.black,
+    fontSize: 24,
+    fontWeight: 'bold',
+    lineHeight: 28,
+  },
+  contentCon: {
+    flexDirection: 'row',
+    marginTop: 10,
+    paddingHorizontal: 20,
+  },
+  authorCon: {
+    flexDirection: 'column',
+    paddingLeft: 6,
+  },
+  date: {
+    color: COLORS.grey,
+    fontSize: 14,
+    fontWeight: 'bold',
+    // lineHeight: 18,
+  },
+  contentCon: {
+    paddingHorizontal: 20,
+    backgroundColor: COLORS.white,
+  },
+  title: {
+    fontSize: 15,
+    color: COLORS.grey,
+    lineHeight: 15,
+    marginBottom: 4,
+    fontWeight: 'bold',
+  },
+  summary: {
+    fontSize: 18,
+    color: COLORS.black,
+    lineHeight: 24,
+    marginBottom: 4,
+  },
+});
 
 export default NewsDetailsScreen;

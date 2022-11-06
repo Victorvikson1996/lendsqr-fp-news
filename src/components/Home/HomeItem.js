@@ -26,10 +26,10 @@ const HomeItem = ({item}) => {
             activeOpacity={0.8}
             style={{marginBottom: 14}}
             onPress={() => navigation.navigate('NEWS', {item})}>
-            <View id={`item.${item.id}.image_url`}>
+            <View id={`item.${item.id}.media`}>
               <Image
                 style={styles.image}
-                source={{uri: item.image_url}}
+                source={{uri: `${item?.media}`}}
                 resizeMode="cover"
               />
             </View>
@@ -43,6 +43,9 @@ const HomeItem = ({item}) => {
                 <View style={styles.title}>
                   <View id={`item.${item.id}.title`}>
                     <Text style={styles.titleText}>{item.title}</Text>
+                  </View>
+                  <View id={`item.${item.id}.title`}>
+                    <Text style={styles.titleText}>{item.author}</Text>
                   </View>
                   <View id={`item.${item.id}.description`}>
                     <Text style={styles.description}>{item.description}</Text>
