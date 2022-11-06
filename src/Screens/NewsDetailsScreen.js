@@ -8,15 +8,13 @@ import {
   Dimensions,
   StatusBar,
   Pressable,
+  Linking,
 } from 'react-native';
 
-import {SharedElement} from 'react-navigation-shared-element';
 import * as Animatable from 'react-native-animatable';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {COLORS} from '../utils';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {Headers} from '../components/Header';
-import {useNavigation} from '@react-navigation/native';
+
 const {height} = Dimensions.get('window');
 const ITEM_HEIGHT = height * 0.5;
 import {BackIcon} from '../assets/icon';
@@ -25,8 +23,6 @@ import moment from 'moment';
 const NewsDetailsScreen = ({navigation, route}) => {
   const {item} = route.params;
   const buttonRef = React.useRef();
-
-  const date = item.published_date;
 
   return (
     <View style={styles.container}>
@@ -52,10 +48,10 @@ const NewsDetailsScreen = ({navigation, route}) => {
       </Animatable.View>
       <View style={styles.contentCon}>
         <View style={styles.authorCon}>
-          <View id={`item.${item.id}.title`}>
+          <View id={`item.${item.id}.author`}>
             <Text style={styles.author}>{item.author}</Text>
           </View>
-          <View id={`item.${item.id}.description`}>
+          <View id={`item.${item.id}.published_date`}>
             <Text style={styles.date}>
               Date: {moment(item.published_date).utc().format('MMM Do, YYYY')}
             </Text>

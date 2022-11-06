@@ -4,7 +4,7 @@ import axios from 'axios';
 export const getNews = createAsyncThunk(
   'news/getNews',
   async function (
-    {media = 'True', lang = 'en', topic = 'tech', country = 'UK'},
+    {media = 'True', lang = 'en', topic = 'music', country = 'UK'},
     {rejectWithValue},
   ) {
     try {

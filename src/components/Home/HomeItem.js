@@ -11,6 +11,8 @@ import {
 import React from 'react';
 import {SharedElement} from 'react-navigation-shared-element';
 import {useNavigation} from '@react-navigation/native';
+import moment from 'moment';
+import {COLORS} from '../../utils';
 
 const {width} = Dimensions.get('screen');
 const ITEM_WIDTH = width * 0.9;
@@ -41,14 +43,20 @@ const HomeItem = ({item}) => {
               }}>
               <View style={styles.titleContainer}>
                 <View style={styles.title}>
-                  <View id={`item.${item.id}.title`}>
+                  {/* <View id={`item.${item.id}.title`}>
                     <Text style={styles.titleText}>{item.title}</Text>
+                  </View> */}
+
+                  <View id={`item.${item.id}.description`}>
+                    <Text style={styles.description}>{item.title}</Text>
                   </View>
                   <View id={`item.${item.id}.title`}>
                     <Text style={styles.titleText}>{item.author}</Text>
                   </View>
-                  <View id={`item.${item.id}.description`}>
-                    <Text style={styles.description}>{item.description}</Text>
+                  <View id={`item.${item.id}.title`}>
+                    <Text style={styles.date}>
+                      {moment(item.published_date).utc().format('MMM Do, YYYY')}
+                    </Text>
                   </View>
                 </View>
               </View>
@@ -88,6 +96,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     lineHeight: 18,
+  },
+  date: {
+    color: COLORS.white,
+    fontSize: 18,
+    fontWeight: 'bold',
+    lineHeight: 28,
   },
 });
 
