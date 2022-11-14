@@ -13,6 +13,8 @@ const COLORS = {
   transparent: 'rgba(0, 0, 0, 0.3)',
   purple: '#9374b7',
   lendsqr: '#6290B0',
+  darkBlue: '#7978B5',
+  light: '#F3F4FB',
 };
 
 export default COLORS;

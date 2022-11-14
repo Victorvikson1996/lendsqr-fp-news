@@ -15,6 +15,8 @@ import {HomeItem} from '../components/Home';
 import {data} from '../utils/api/data';
 import {useDispatch, useSelector} from 'react-redux';
 import {getNews} from '../Redux/Slice/NewsSlice';
+import firestore from '@react-native-firebase/firestore';
+import {Loader} from '../components/Loader';
 
 import {SharedElement} from 'react-navigation-shared-element';
 
@@ -65,7 +67,9 @@ const HomeScreen = () => {
         <FlatList
           data={news?.articles}
           keyExtractor={(item, index) => `${index}`}
-          renderItem={({item, index}) => <HomeItem item={item} index={index} />}
+          renderItem={({item, index}) => (
+            <HomeItem testID="item" item={item} index={index} />
+          )}
           showsVerticalScrollIndicator={false}
           ListHeaderComponent={Headers}
           refreshControl={
@@ -74,6 +78,8 @@ const HomeScreen = () => {
               onRefresh={HandleRefreshControl}
             />
           }
+          maxToRenderPerBatch={10}
+          testID="flatList"
         />
       </View>
     </SafeAreaView>

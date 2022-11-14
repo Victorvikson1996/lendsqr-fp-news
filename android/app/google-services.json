@@ -1,37 +1,45 @@
 {
   "project_info": {
-    "project_number": "475507839271",
-    "project_id": "lendsqr-fp-news-c3901",
-    "storage_bucket": "lendsqr-fp-news-c3901.appspot.com"
+    "project_number": "600506065348",
+    "project_id": "lendsqr-ed2f3",
+    "storage_bucket": "lendsqr-ed2f3.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:475507839271:android:23927310f8fc7d85f0d902",
+        "mobilesdk_app_id": "1:600506065348:android:25d6f03d62a15810058491",
         "android_client_info": {
           "package_name": "com.lendsqr"
         }
       },
       "oauth_client": [
         {
-          "client_id": "475507839271-ilbm6vtpil9cmmls3mv3cgedvm7gb6aj.apps.googleusercontent.com",
+          "client_id": "600506065348-5fp38nm2go1llj8ef44t5ouhoeu0kup8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lendsqr",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "600506065348-majapleh3175bplrgihbtu9cfdfborq7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC8GVNW1JhvJadTtOuMAgUryhJ00th_p2I"
+          "current_key": "AIzaSyA79roY-wYLybf5_1_wbHwbpXpCxESb2CY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "475507839271-ilbm6vtpil9cmmls3mv3cgedvm7gb6aj.apps.googleusercontent.com",
+              "client_id": "600506065348-majapleh3175bplrgihbtu9cfdfborq7.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "475507839271-nam7h2vq6ncfnr3he7vnqasmjs43pes0.apps.googleusercontent.com",
+              "client_id": "600506065348-dqdceuk455bpsp33584te9fdojf7c44e.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "org.reactjs.native.example.Lendsqr"

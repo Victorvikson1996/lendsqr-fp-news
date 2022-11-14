@@ -11,6 +11,8 @@ import moment from 'moment';
 import {Button} from '../Buttons';
 import {MenuIcon} from '../../assets/icon';
 import {useNavigation} from '@react-navigation/native';
+import Crashlytics from '@react-native-firebase/crashlytics';
+import UserSclice from '../../Redux/Slice/UserSclice';
 
 const Headers = () => {
   const navigation = useNavigation();
@@ -18,10 +20,10 @@ const Headers = () => {
     navigation.navigate('USER');
   };
   return (
-    <View style={styles.headerContainer}>
+    <View testID="header" style={styles.headerContainer}>
       <Text style={styles.date}>{moment().calendar()}</Text>
       <Text style={styles.dateText}>News Today 🌎 </Text>
-      <Pressable>
+      <Pressable onPress={() => UserSclice()}>
         <Text style={styles.error}>Erro Handling</Text>
       </Pressable>
       <TouchableOpacity onPress={_goToUser} style={styles.menu}>

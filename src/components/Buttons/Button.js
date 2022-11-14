@@ -10,8 +10,31 @@ import {COLORS} from '../../utils';
 
 const Button = ({onPress, text}) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.button}>
+    <TouchableOpacity testID="button" onPress={onPress} style={styles.button}>
       <Text style={styles.buttonText}>{text}</Text>
+    </TouchableOpacity>
+  );
+};
+
+export const DefaultButton = ({title, onPress = () => {}}) => {
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      activeOpacity={0.7}
+      style={{
+        height: 55,
+        width: '100%',
+        backgroundColor: COLORS.lendsqr,
+        marginVertical: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+      testID="button">
+      <Text
+        testID="text"
+        style={{color: COLORS.white, fontWeight: 'bold', fontSize: 18}}>
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };

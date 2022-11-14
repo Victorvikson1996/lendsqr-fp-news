@@ -48,8 +48,8 @@ const NewsDetailsScreen = ({navigation, route}) => {
       </Animatable.View>
       <View style={styles.contentCon}>
         <View style={styles.authorCon}>
-          <View id={`item.${item.id}.author`}>
-            <Text style={styles.author}>{item.author}</Text>
+          <View id={`item.${item.id}.author`} style={{marginTop: 10}}>
+            <Text style={styles.author}>Author: {item.author}</Text>
           </View>
           <View id={`item.${item.id}.published_date`}>
             <Text style={styles.date}>
@@ -64,6 +64,11 @@ const NewsDetailsScreen = ({navigation, route}) => {
         contentContainerStyle={{paddingVertical: 20}}>
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.summary}>{item.summary}</Text>
+        <Text
+          onPress={() => Linking.openURL(item.link)}
+          style={[{color: COLORS.blue}, styles.Link]}>
+          Read more here
+        </Text>
       </ScrollView>
     </View>
   );
@@ -89,8 +94,8 @@ const styles = StyleSheet.create({
     // width: 40,
   },
   author: {
-    color: COLORS.black,
-    fontSize: 24,
+    color: COLORS.lendsqr,
+    fontSize: 20,
     fontWeight: 'bold',
     lineHeight: 28,
   },
@@ -125,6 +130,12 @@ const styles = StyleSheet.create({
     color: COLORS.black,
     lineHeight: 24,
     marginBottom: 4,
+  },
+  Link: {
+    fontSize: 15,
+    color: COLORS.blue,
+
+    marginBottom: 50,
   },
 });
 

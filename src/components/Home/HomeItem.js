@@ -22,7 +22,7 @@ const HomeItem = ({item}) => {
   const navigation = useNavigation();
   return (
     <>
-      <View style={styles.container}>
+      <View testID="item" style={styles.container}>
         <View key={item.id}>
           <Pressable
             activeOpacity={0.8}

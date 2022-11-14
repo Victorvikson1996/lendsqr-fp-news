@@ -27,14 +27,42 @@ const Error = ({display = false}) => {
   );
 };
 
-const Input = ({label, error, ...props}) => {
+const Input = ({
+  label,
+  error,
+  errorMessage,
+  inputRef,
+  onFocus,
+  onBlur,
+  touched,
+  ...props
+}) => {
+  const [isFocused, setIsFocused] = useState(false);
+  const _onFocus = () => {
+    setIsFocused(true);
+    typeof onFocus === 'function' && onFocus();
+  };
+
+  const _onBlur = () => {
+    setIsFocused(false);
+    typeof onBlur === 'function' && onBlur();
+  };
+
   return (
     <View style={styles.inputContainer}>
       <Text style={styles.inputLabel}>{label}</Text>
 
       <View style={styles.row}>
-        <TextInput autoCapitalize="none" style={styles.input} {...props} />
-
+        <TextInput
+          autoCapitalize="none"
+          onFocus={onFocus}
+          onBlur={onBlur}
+          selectionColor={COLORS.ACTIVE}
+          style={styles.input}
+          {...props}
+          touched={touched}
+        />
+        <Text style={styles.error}>{errorMessage}</Text>
         <Error display={error} />
       </View>
     </View>
@@ -70,6 +98,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  error: {color: COLORS.red, marginTop: 4, marginBottom: 16, height: 16},
 });
 
 export default Input;
